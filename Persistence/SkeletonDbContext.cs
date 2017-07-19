@@ -1,3 +1,4 @@
+using dncNgCarSales.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace dncNgCarSales.Persistence
@@ -8,5 +9,7 @@ namespace dncNgCarSales.Persistence
             : base(options)
         {
         }
+
+        public DbSet<Make> Makes { get; set; }
     }
 }
