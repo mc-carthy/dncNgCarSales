@@ -8,9 +8,10 @@ using dncNgCarSales.Persistence;
 namespace Skeleton.Migrations
 {
     [DbContext(typeof(SkeletonDbContext))]
-    partial class SkeletonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170719233845_EnsureNamesAreNotNullableAndHaveAMaxLength")]
+    partial class EnsureNamesAreNotNullableAndHaveAMaxLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
