@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dncNgCarSales.Persistence
 {
-    public class VehicleRepository
+    public class VehicleRepository : IVehicleRepository
     {
         private readonly SkeletonDbContext context;
         public VehicleRepository(SkeletonDbContext context)
