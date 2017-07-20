@@ -78,6 +78,8 @@ namespace dncNgCarSales.Controllers
 
             await unitOfWork.CompleteAsync();
 
+            vehicle = await repository.GetVehicle(id);
+
             var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
 
             return Ok(result);
