@@ -17,8 +17,8 @@ namespace Skeleton.Migrations
             migrationBuilder.Sql("INSERT INTO Models (Name, MakeId) Values ('A6', (SELECT ID FROM Makes WHERE Name = 'Audi'))");
             
             migrationBuilder.Sql("INSERT INTO Models (Name, MakeId) Values ('1-Series', (SELECT ID FROM Makes WHERE Name = 'BMW'))");
-            migrationBuilder.Sql("INSERT INTO Models (Name, MakeId) Values ('5-Series', (SELECT ID FROM Makes WHERE Name = 'BMW'))");
             migrationBuilder.Sql("INSERT INTO Models (Name, MakeId) Values ('3-Series', (SELECT ID FROM Makes WHERE Name = 'BMW'))");
+            migrationBuilder.Sql("INSERT INTO Models (Name, MakeId) Values ('5-Series', (SELECT ID FROM Makes WHERE Name = 'BMW'))");
             
             migrationBuilder.Sql("INSERT INTO Models (Name, MakeId) Values ('A-Class', (SELECT ID FROM Makes WHERE Name = 'Mercedes'))");
             migrationBuilder.Sql("INSERT INTO Models (Name, MakeId) Values ('C-Class', (SELECT ID FROM Makes WHERE Name = 'Mercedes'))");
