@@ -20,6 +20,21 @@ namespace dncNgCarSales.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVehicle(int id)
+        {
+            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
+
+            return Ok(result);            
+        }
+
         [HttpPost()]
         public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
         {
@@ -53,7 +68,7 @@ namespace dncNgCarSales.Controllers
             {
                 return NotFound();
             }
-            
+
             mapper.Map<VehicleResource, Vehicle>(vehicleResource, vehicle);
             vehicle.LastUpdate = DateTime.Now;
 
