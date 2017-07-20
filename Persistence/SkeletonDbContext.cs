@@ -5,12 +5,23 @@ namespace dncNgCarSales.Persistence
 {
     public class SkeletonDbContext : DbContext
     {
+
+        public DbSet<Make> Makes { get; set; }
+        public DbSet<Feature> Features { get; set; }
+
         public SkeletonDbContext(DbContextOptions<SkeletonDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Make> Makes { get; set; }
-        public DbSet<Feature> Features { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<VehicleFeature>()
+                .HasKey(vf => new {
+                    vf.VehicleId,
+                    vf.FeatureId
+                });
+        }
+
     }
 }
