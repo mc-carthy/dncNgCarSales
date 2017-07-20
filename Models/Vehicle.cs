@@ -25,11 +25,11 @@ namespace dncNgCarSales.Models
         [StringLength(255)]
         public string ContactEmail { get; set; }
         public DateTime LastUpdate { get; set; }
-        public ICollection<VehicleFeature> VehicleFeatures { get; set; }
+        public ICollection<VehicleFeature> Features { get; set; }
 
         public Vehicle()
         {
-            VehicleFeatures = new Collection<VehicleFeature>();
+            Features = new Collection<VehicleFeature>();
         }
     }
 }
