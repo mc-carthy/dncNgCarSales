@@ -13,13 +13,13 @@ namespace dncNgCarSales.Controllers
     public class VehiclesController : Controller
     {
         private readonly IMapper mapper;
-        private readonly SkeletonDbContext context;
         private readonly IVehicleRepository repository;
-        public VehiclesController(IMapper mapper, SkeletonDbContext context, IVehicleRepository repository)
+        private readonly IUnitOfWork unitOfWork;
+        public VehiclesController(IMapper mapper, IVehicleRepository repository, IUnitOfWork unitOfWork)
         {
-            this.context = context;
             this.mapper = mapper;
             this.repository = repository;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpGet("{id}")]
@@ -49,7 +49,7 @@ namespace dncNgCarSales.Controllers
             vehicle.LastUpdate = DateTime.Now;
 
             repository.Add(vehicle);
-            await context.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             vehicle = await repository.GetVehicle(vehicle.Id);
 
@@ -76,7 +76,7 @@ namespace dncNgCarSales.Controllers
             mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource, vehicle);
             vehicle.LastUpdate = DateTime.Now;
 
-            await context.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
 
@@ -94,7 +94,7 @@ namespace dncNgCarSales.Controllers
             }
 
             repository.Remove(vehicle);
-            await context.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             return Ok(id);
         }
