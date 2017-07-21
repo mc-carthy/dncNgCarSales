@@ -2,8 +2,8 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using dncNgCarSales.Controllers.Resources;
-using dncNgCarSales.Models;
-using dncNgCarSales.Persistence;
+using dncNgCarSales.Core.Models;
+using dncNgCarSales.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

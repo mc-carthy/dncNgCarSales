@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace dncNgCarSales.Persistence
+namespace dncNgCarSales.Core
 {
     public interface IUnitOfWork
     {

@@ -1,4 +1,4 @@
-using dncNgCarSales.Models;
+using dncNgCarSales.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace dncNgCarSales.Persistence

@@ -1,6 +1,6 @@
 using AutoMapper;
 using dncNgCarSales.Controllers.Resources;
-using dncNgCarSales.Models;
+using dncNgCarSales.Core.Models;
 using System.Linq;
 using System.Collections.Generic;
 

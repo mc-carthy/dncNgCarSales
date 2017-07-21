@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
-using dncNgCarSales.Models;
+using dncNgCarSales.Core;
+using dncNgCarSales.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace dncNgCarSales.Persistence
@@ -18,7 +19,7 @@ namespace dncNgCarSales.Persistence
             {
                 return await context.Vehicles.FindAsync(id);
             }
-            
+
             return await context.Vehicles
                 .Include(v => v.Features)
                     .ThenInclude(vf => vf.Feature)

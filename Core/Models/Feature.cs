@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace dncNgCarSales.Models
+namespace dncNgCarSales.Core.Models
 {
     public class Feature
     {

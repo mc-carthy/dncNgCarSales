@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using dncNgCarSales.Models;
+using dncNgCarSales.Core.Models;
 
-namespace dncNgCarSales.Persistence
+namespace dncNgCarSales.Core
 {
     public interface IVehicleRepository
     {

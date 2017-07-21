@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using dncNgCarSales.Models;
+using dncNgCarSales.Core.Models;
 using dncNgCarSales.Persistence;
 using dncNgCarSales.Controllers.Resources;
 using Microsoft.AspNetCore.Mvc;
