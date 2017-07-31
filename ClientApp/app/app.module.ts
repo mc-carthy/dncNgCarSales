@@ -14,6 +14,9 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
 
 import { VehicleService } from './services/vehicle.service';
 
+import { AppErrorHandler } from './app.error-handler';
+import { ErrorHandler } from '@angular/core';
+
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
@@ -38,6 +41,7 @@ import { VehicleService } from './services/vehicle.service';
         ])
     ],
     providers: [
+        { provide: ErrorHandler, useClass: AppErrorHandler },
         VehicleService
     ]
 })
