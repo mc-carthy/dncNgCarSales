@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { UniversalModule } from 'angular2-universal';
 import { ToastyModule } from 'ng2-toasty';
 
@@ -14,8 +14,14 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
 
 import { VehicleService } from './services/vehicle.service';
 
+import * as Raven from 'raven-js';
+
 import { AppErrorHandler } from './app.error-handler';
 import { ErrorHandler } from '@angular/core';
+
+Raven
+  .config('https://98baceabf087424eaede273c9228b47a@sentry.io/197939')
+  .install();
 
 @NgModule({
     bootstrap: [ AppComponent ],
