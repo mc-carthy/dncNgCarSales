@@ -44,14 +44,7 @@ namespace dncNgCarSales.Persistence
                 ["id"] = (v => v.Id)
             };
 
-            if (queryObj.IsSortAscending)
-            {
-                query.OrderBy(columnsMap[queryObj.SortBy]);
-            }
-            else
-            {
-                query.OrderByDescending(columnsMap[queryObj.SortBy]);
-            }
+            query = ApplyOrdering(queryObj, query, columnsMap);
 
             return await query.ToListAsync();
         }
@@ -79,6 +72,18 @@ namespace dncNgCarSales.Persistence
         public void Remove(Vehicle vehicle)
         {
             context.Remove(vehicle);
+        }
+
+        private IQueryable<Vehicle> ApplyOrdering(VehicleQuery queryObj, IQueryable<Vehicle> query, Dictionary<string, Expression<Func<Vehicle, object>>> columnsMap)
+        {
+            if (queryObj.IsSortAscending)
+            {
+                return query.OrderBy(columnsMap[queryObj.SortBy]);
+            }
+            else
+            {
+                return query.OrderByDescending(columnsMap[queryObj.SortBy]);
+            }
         }
     }
 }
