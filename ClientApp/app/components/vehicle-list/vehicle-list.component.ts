@@ -24,6 +24,7 @@ export class VehicleListComponent implements OnInit {
     }
 
     onFilterChange() {
+        this.populateModels();
         this.populateVehicles();
     }
 
@@ -32,8 +33,13 @@ export class VehicleListComponent implements OnInit {
         this.onFilterChange();
     }
 
-    populateModels(makeId) {
-        var selectedMake = this.makes.find(m => m.id == makeId);
+    resetModel()
+    {
+        this.filter.modelId = null;
+    }
+
+    populateModels() {
+        var selectedMake = this.makes.find(m => m.id == this.filter.makeId);
         this.models = selectedMake ? selectedMake.models : [];
     }
 
