@@ -39,7 +39,7 @@ export class VehicleFormComponent implements OnInit {
         private toastyService: ToastyService
     ) {
         route.params.subscribe(p => {
-            this.vehicle.id = +p['id'];
+            this.vehicle.id = p['id'];
         });
     }
 
@@ -115,9 +115,15 @@ export class VehicleFormComponent implements OnInit {
         }
         else {
             this.vehicleService.create(this.vehicle)
-                .subscribe(
-                    x => console.log(x)
-                );
+                .subscribe(x => {
+                    this.toastyService.success({
+                        title: 'Success',
+                        msg: 'The vehicle has been successfully created',
+                        theme: 'bootstrap',
+                        showClose: true,
+                        timeout: 5000
+                    });                
+                });
         }
     }
 
