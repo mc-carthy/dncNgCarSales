@@ -10,10 +10,23 @@ export class VehicleService {
     private readonly vehiclesEndpoint = 'api/vehicles';
     constructor(private http: Http) { }
 
-    getVehicles()
+    getVehicles(filter)
     {
-        return this.http.get(this.vehiclesEndpoint)
+        return this.http.get(this.vehiclesEndpoint + '?' + this.toQueryString(filter))
             .map(res => res.json());
+    }
+
+    toQueryString(obj)
+    {
+        var parts = [];
+        for (var prop in obj) {
+            var value = obj[prop];
+            if (value != null && value != undefined) {
+                parts.push(encodeURIComponent(prop) + '=' + encodeURIComponent(value));
+            }
+        }
+
+        return parts.join('&');
     }
 
     getVehicle(id)
