@@ -24,9 +24,9 @@ namespace dncNgCarSales.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VehicleResource>> GetVehicles(FilterResource filterResource)
+        public async Task<IEnumerable<VehicleResource>> GetVehicles(VehicleQueryResource filterResource)
         {
-            var filter = Mapper.Map<FilterResource, Filter>(filterResource);
+            var filter = Mapper.Map<VehicleQueryResource, VehicleQuery>(filterResource);
             var vehicles = await repository.GetVehicles(filter);
 
             return Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
