@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using dncNgCarSales.Core;
 using dncNgCarSales.Core.Models;
@@ -34,24 +36,21 @@ namespace dncNgCarSales.Persistence
                 query = query.Where(v => v.ModelId == queryObj.ModelId.Value);
             }
 
-            if (queryObj.SortBy == "make")
+            var columnsMap = new Dictionary<string, Expression<Func<Vehicle, object>>>()
             {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(v => v.Model.Make.Name) : query.OrderByDescending(v => v.Model.Make.Name);
-            }
+                ["make"] = (v => v.Model.Make.Name),
+                ["model"] = (v => v.Model.Name),
+                ["contactName"] = (v => v.ContactName),
+                ["id"] = (v => v.Id)
+            };
 
-            if (queryObj.SortBy == "model")
+            if (queryObj.IsSortAscending)
             {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(v => v.Model.Name) : query.OrderByDescending(v => v.Model.Name);
+                query.OrderBy(columnsMap[queryObj.SortBy]);
             }
-
-            if (queryObj.SortBy == "contactName")
+            else
             {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(v => v.ContactName) : query.OrderByDescending(v => v.ContactName);
-            }
-
-            if (queryObj.SortBy == "id")
-            {
-                query = (queryObj.IsSortAscending) ? query.OrderBy(v => v.Id) : query.OrderByDescending(v => v.Id);
+                query.OrderByDescending(columnsMap[queryObj.SortBy]);
             }
 
             return await query.ToListAsync();
