@@ -6,6 +6,7 @@ using dncNgCarSales.Core.Models;
 using dncNgCarSales.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace dncNgCarSales.Controllers
 {
@@ -20,6 +21,14 @@ namespace dncNgCarSales.Controllers
             this.mapper = mapper;
             this.repository = repository;
             this.unitOfWork = unitOfWork;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<VehicleResource>> GetVehicles()
+        {
+            var vehicles = await repository.GetVehicles();
+
+            return Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
         }
 
         [HttpGet("{id}")]
