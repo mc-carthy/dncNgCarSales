@@ -15,7 +15,7 @@ namespace dncNgCarSales.Persistence
             this.context = context;
         }
 
-        public async Task<IEnumerable<Vehicle>> GetVehicles(VehicleQuery filter)
+        public async Task<IEnumerable<Vehicle>> GetVehicles(VehicleQuery queryObj)
         {
             var query = context.Vehicles
                 .Include(v => v.Model)
@@ -24,14 +24,14 @@ namespace dncNgCarSales.Persistence
                     .ThenInclude(vf => vf.Feature)
                 .AsQueryable();
 
-            if (filter.MakeId.HasValue)
+            if (queryObj.MakeId.HasValue)
             {
-                query = query.Where(v => v.Model.MakeId == filter.MakeId.Value);
+                query = query.Where(v => v.Model.MakeId == queryObj.MakeId.Value);
             }
 
-            if (filter.ModelId.HasValue)
+            if (queryObj.ModelId.HasValue)
             {
-                query = query.Where(v => v.ModelId == filter.ModelId.Value);
+                query = query.Where(v => v.ModelId == queryObj.ModelId.Value);
             }
 
             return await query.ToListAsync();
