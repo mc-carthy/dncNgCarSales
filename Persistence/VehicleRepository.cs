@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using dncNgCarSales.Core;
 using dncNgCarSales.Core.Models;
+using dncNgCarSales.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace dncNgCarSales.Persistence
@@ -40,11 +41,10 @@ namespace dncNgCarSales.Persistence
             {
                 ["make"] = (v => v.Model.Make.Name),
                 ["model"] = (v => v.Model.Name),
-                ["contactName"] = (v => v.ContactName),
-                ["id"] = (v => v.Id)
+                ["contactName"] = (v => v.ContactName)
             };
 
-            query = ApplyOrdering(queryObj, query, columnsMap);
+            query = query.ApplyOrdering(queryObj, columnsMap);
 
             return await query.ToListAsync();
         }
@@ -72,18 +72,6 @@ namespace dncNgCarSales.Persistence
         public void Remove(Vehicle vehicle)
         {
             context.Remove(vehicle);
-        }
-
-        private IQueryable<Vehicle> ApplyOrdering(VehicleQuery queryObj, IQueryable<Vehicle> query, Dictionary<string, Expression<Func<Vehicle, object>>> columnsMap)
-        {
-            if (queryObj.IsSortAscending)
-            {
-                return query.OrderBy(columnsMap[queryObj.SortBy]);
-            }
-            else
-            {
-                return query.OrderByDescending(columnsMap[queryObj.SortBy]);
-            }
         }
     }
 }
