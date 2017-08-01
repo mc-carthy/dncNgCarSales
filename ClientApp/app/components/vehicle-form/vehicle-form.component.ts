@@ -7,6 +7,7 @@ import "rxjs/add/Observable/forkJoin";
 import * as _ from 'underscore';
 
 import { Vehicle, SaveVehicle } from './../../models/vehicle';
+import { NgForm } from "@angular/forms";
 
 @Component({
     selector: 'vehicle-form',
@@ -99,7 +100,7 @@ export class VehicleFormComponent implements OnInit {
         }
     }
 
-    submit()
+    submit(f: NgForm)
     {
         if (this.vehicle.id) {
             this.vehicleService.update(this.vehicle)
@@ -125,6 +126,7 @@ export class VehicleFormComponent implements OnInit {
                     });                
                 });
         }
+        f.resetForm();
     }
 
     delete()
