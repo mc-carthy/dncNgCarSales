@@ -11,6 +11,7 @@ namespace dncNgCarSales.Mapping
         public MappingProfile()
         {
             // Domain -> API Resource
+            CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Make, MakeResource>();
             CreateMap<Make, KeyValuePairResource>();
             CreateMap<Model, KeyValuePairResource>();
@@ -43,7 +44,7 @@ namespace dncNgCarSales.Mapping
                 ));    
                 
             // API Resource -> Domain
-        CreateMap<VehicleQueryResource, VehicleQuery>();
+            CreateMap<VehicleQueryResource, VehicleQuery>();
             CreateMap<SaveVehicleResource, Vehicle>()
                 .ForMember(v => v.Id, opt => opt.Ignore())
                 .ForMember(v => v.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
