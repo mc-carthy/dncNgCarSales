@@ -13,7 +13,9 @@ export class VehicleListComponent implements OnInit {
     vehicles: Vehicle[];
     makes: any[];
     models: any[];
-    query: any = {};
+    query: any = {
+        pageSize: 3
+    };
     columns = [
         {
             title: 'Id',
@@ -82,5 +84,11 @@ export class VehicleListComponent implements OnInit {
     {
         this.vehicleService.getVehicles(this.query)
             .subscribe(vehicles => this.vehicles = vehicles);
+    }
+
+    onPageChanged(page)
+    {
+        this.query.page = page;
+        this.populateVehicles();
     }
 }

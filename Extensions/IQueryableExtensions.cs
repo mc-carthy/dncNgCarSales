@@ -35,10 +35,16 @@ namespace dncNgCarSales.Extensions
             IQueryObject queryObj
         )
         {
-            queryObj.Page = (queryObj.Page <= 0) ? 1 : queryObj.PageSize;
-            queryObj.PageSize = (queryObj.PageSize <= 0) ? 10 : queryObj.PageSize;
+            if (queryObj.PageSize <= 0)
+            {
+                queryObj.PageSize = 10;
+            }
+            if (queryObj.Page <= 0)
+            {
+                queryObj.Page = 1;
+            }
             
-            return query.Skip((queryObj.Page - 1) * queryObj.PageSize).Take(queryObj.PageSize);
+            return query = query.Skip((queryObj.Page - 1) * queryObj.PageSize).Take(queryObj.PageSize);
         }
     }
 }
