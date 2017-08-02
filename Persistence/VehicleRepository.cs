@@ -47,10 +47,8 @@ namespace dncNgCarSales.Persistence
             };
 
             query = query.ApplyOrdering(queryObj, columnsMap);
-            query = query.ApplyPaging(queryObj);
-
             result.TotalItems = await query.CountAsync();
-            
+            query = query.ApplyPaging(queryObj);
             result.Items = await query.ToListAsync();
 
             return result;

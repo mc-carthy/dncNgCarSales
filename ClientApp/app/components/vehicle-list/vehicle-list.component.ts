@@ -10,11 +10,14 @@ import { VehicleService } from './../../services/vehicle.service';
 })
 
 export class VehicleListComponent implements OnInit {
-    vehicles: Vehicle[];
+
+    private readonly PAGE_SIZE = 3;
+
+    queryResult: any = {};
     makes: any[];
     models: any[];
     query: any = {
-        pageSize: 3
+        pageSize: this.PAGE_SIZE
     };
     columns = [
         {
@@ -49,12 +52,13 @@ export class VehicleListComponent implements OnInit {
     }
 
     onFilterChange() {
+        this.query.page = 1;
         this.populateModels();
         this.populateVehicles();
     }
 
     resetFilter() {
-        this.query = {};
+        this.query.pageSize = this.PAGE_SIZE;
         this.onFilterChange();
     }
 
@@ -83,7 +87,10 @@ export class VehicleListComponent implements OnInit {
     private populateVehicles()
     {
         this.vehicleService.getVehicles(this.query)
-            .subscribe(vehicles => this.vehicles = vehicles);
+            .subscribe(result => {
+                this.queryResult = result;
+                console.log(result);
+            });
     }
 
     onPageChanged(page)
