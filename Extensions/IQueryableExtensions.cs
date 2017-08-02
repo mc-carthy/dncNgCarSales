@@ -29,5 +29,16 @@ namespace dncNgCarSales.Extensions
                 return query.OrderByDescending(columnsMap[queryObj.SortBy]);
             }
         }   
+
+        public static IQueryable<T> ApplyPaging<T>(
+            this IQueryable<T> query,
+            IQueryObject queryObj
+        )
+        {
+            queryObj.Page = (queryObj.Page <= 0) ? 1 : queryObj.PageSize;
+            queryObj.PageSize = (queryObj.PageSize <= 0) ? 10 : queryObj.PageSize;
+            
+            return query.Skip((queryObj.Page - 1) * queryObj.PageSize).Take(queryObj.PageSize);
+        }
     }
 }
