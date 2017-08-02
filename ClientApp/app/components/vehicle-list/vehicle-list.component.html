@@ -5,12 +5,12 @@
 <div class="well">
     <div class="form-group">
         <label for="make">Make</label>
-        <select name="make" class="form-control" [(ngModel)]="filter.makeId" (change)="resetModel(); onFilterChange()">
+        <select name="make" class="form-control" [(ngModel)]="query.makeId" (change)="resetModel(); onFilterChange()">
             <option value=""></option>
             <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
         </select>
         <label for="model">Model</label>
-        <select name="model" class="form-control" [(ngModel)]="filter.modelId" (change)="onFilterChange()">  
+        <select name="model" class="form-control" [(ngModel)]="query.modelId" (change)="onFilterChange()">  
             <option value=""></option>
             <option *ngFor="let m of models" value="{{ m.id }}">{{ m.name }}</option>
         </select>
@@ -21,9 +21,9 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Make</th>
-      <th>Model</th>
-      <th>Contact Name</th>
+      <th class="clickable" (click)="sortBy('make')">Make</th>
+      <th class="clickable" (click)="sortBy('model')">Model</th>
+      <th class="clickable" (click)="sortBy('contactName')">Contact Name</th>
       <th></th>
     </tr>
   </thead>

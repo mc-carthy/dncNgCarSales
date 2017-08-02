@@ -13,7 +13,7 @@ export class VehicleListComponent implements OnInit {
     vehicles: Vehicle[];
     makes: any[];
     models: any[];
-    filter: any = {};
+    query: any = {};
 
     constructor(private vehicleService: VehicleService) { }
 
@@ -29,23 +29,35 @@ export class VehicleListComponent implements OnInit {
     }
 
     resetFilter() {
-        this.filter = {};
+        this.query = {};
         this.onFilterChange();
     }
 
     resetModel()
     {
-        this.filter.modelId = null;
+        this.query.modelId = null;
     }
 
     populateModels() {
-        var selectedMake = this.makes.find(m => m.id == this.filter.makeId);
+        var selectedMake = this.makes.find(m => m.id == this.query.makeId);
         this.models = selectedMake ? selectedMake.models : [];
+    }
+
+    sortBy(columnName)
+    {
+        if (this.query.sortBy == columnName) {
+            this.query.isSortAscending = !this.query.isSortAscending;
+        } else {
+            this.query.sortBy = columnName;
+            this.query.isSortAscending = true;
+        }
+
+        this.populateVehicles();
     }
 
     private populateVehicles()
     {
-        this.vehicleService.getVehicles(this.filter)
+        this.vehicleService.getVehicles(this.query)
             .subscribe(vehicles => this.vehicles = vehicles);
     }
 }
